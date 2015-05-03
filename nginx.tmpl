@@ -114,7 +114,7 @@ server {
 	include {{ printf "/etc/nginx/vhost.d/%s" $host }};
 	{{ end }}
 
-	{{ range $path, $containers := groupBy $ "Env.VIRTUAL_PATH" }}
+	{{ range $path, $cons := groupBy $containers "Env.VIRTUAL_PATH" }}
 	{{ $pieces := split $path "/" }}
 	{{ $pathLen := len $pieces }}
 	{{ if eq $pathLen 1 }}
@@ -139,7 +139,7 @@ server {
 	include {{ printf "/etc/nginx/vhost.d/%s" $host }};
 	{{ end }}
 
-	{{ range $path, $containers := groupBy $ "Env.VIRTUAL_PATH" }}
+	{{ range $path, $cons := groupBy $containers "Env.VIRTUAL_PATH" }}
 	{{ $pieces := split $path "/" }}
 	{{ $pathLen := len $pieces }}
 	{{ if eq $pathLen 1 }}
