@@ -122,7 +122,7 @@ server {
 	{{ else }}
 	location /{{ index $pieces 1 }} {
 	{{ end }}
-		proxy_pass {{ $proto }}://{{ $host }};
+    proxy_pass {{ $proto }}://{{ replace $path "/" "" -1 }};
 		{{ if (exists (printf "/etc/nginx/htpasswd/%s" $host)) }}
 		auth_basic	"Restricted {{ $host }}";
 		auth_basic_user_file	{{ (printf "/etc/nginx/htpasswd/%s" $host) }};
