@@ -78,7 +78,7 @@ upstream {{ replace $path "/" "" -1 }} {
 {{/* Get the VIRTUAL_PROTO defined by containers w/ the same vhost, falling back to "http" */}}
 {{ $proto := or (first (groupByKeys $containers "Env.VIRTUAL_PROTO")) "http" }}
 
-{{ if (and (exists (printf "/etc/nginx/certs/%s/fullchain.pem" $host)) (exists (printf "/etc/nginx/certs/%s/privkey.pem" $host))) }}
+{{ if (and (exists (printf "/etc/nginx/certs/live/%s/fullchain.pem" $host)) (exists (printf "/etc/nginx/certs/live/%s/privkey.pem" $host))) }}
 
 server {
 	server_name {{ $host }};
@@ -96,8 +96,8 @@ server {
 	ssl_session_timeout 5m;
 	ssl_session_cache shared:SSL:50m;
 
-	ssl_certificate /etc/nginx/certs/{{ (printf "%s/fullchain.pem" $host) }};
-	ssl_certificate_key /etc/nginx/certs/{{ (printf "%s/privkey.pem" $host) }};
+	ssl_certificate /etc/nginx/certs/live/{{ (printf "%s/fullchain.pem" $host) }};
+	ssl_certificate_key /etc/nginx/certs/live/{{ (printf "%s/privkey.pem" $host) }};
 
 	add_header Strict-Transport-Security "max-age=31536000";
 
