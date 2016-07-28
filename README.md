@@ -1,5 +1,4 @@
-![nginx 1.9.15](https://img.shields.io/badge/nginx-1.9.15-brightgreen.svg) ![License MIT](https://img.shields.io/badge/license-MIT-blue.svg) [![Build Status](https://travis-ci.org/jwilder/nginx-proxy.svg?branch=master)](https://travis-ci.org/jwilder/nginx-proxy) [![](https://img.shields.io/docker/stars/jwilder/nginx-proxy.svg)](https://hub.docker.com/r/jwilder/nginx-proxy 'DockerHub') [![](https://img.shields.io/docker/pulls/jwilder/nginx-proxy.svg)](https://hub.docker.com/r/jwilder/nginx-proxy 'DockerHub')
-
+Fork of [jwilder/nginx-proxy](/jwilder/nginx-proxy) with easy let's encrypt support, and support for apps running as paths on the same domain.
 
 nginx-proxy sets up a container running nginx and [docker-gen][1].  docker-gen generates reverse proxy configs for nginx and reloads nginx when containers are started and stopped.
 
@@ -112,25 +111,13 @@ Finally, start your containers with `VIRTUAL_HOST` environment variables.
 
     $ docker run -e VIRTUAL_HOST=foo.bar.com  ...
 
-### SSL Support
+### Let's Encrypt SSL Support
 
-SSL is supported using single host, wildcard and SNI certificates using naming conventions for
-certificates or optionally specifying a cert name (for SNI) as an environment variable.
+SSL is supported using Let's encrypt certs:
 
 To enable SSL:
 
-    $ docker run -d -p 80:80 -p 443:443 -v /path/to/certs:/etc/nginx/certs -v /var/run/docker.sock:/tmp/docker.sock:ro jwilder/nginx-proxy
-
-The contents of `/path/to/certs` should contain the certificates and private keys for any virtual
-hosts in use.  The certificate and keys should be named after the virtual host with a `.crt` and
-`.key` extension.  For example, a container with `VIRTUAL_HOST=foo.bar.com` should have a
-`foo.bar.com.crt` and `foo.bar.com.key` file in the certs directory.
-
-#### Diffie-Hellman Groups
-
-If you have Diffie-Hellman groups enabled, the files should be named after the virtual host with a
-`dhparam` suffix and `.pem` extension. For example, a container with `VIRTUAL_HOST=foo.bar.com`
-should have a `foo.bar.com.dhparam.pem` file in the certs directory.
+    $ docker run -d -p 80:80 -p 443:443 -v /etc/letsencrypt:/etc/nginx/certs -v /var/run/docker.sock:/tmp/docker.sock petecoop/nginx-proxy
 
 #### Wildcard Certificates
 
