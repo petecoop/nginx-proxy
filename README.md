@@ -1,3 +1,5 @@
+[![Build Status](https://img.shields.io/travis/petecoop/nginx-proxy.svg)](https://travis-ci.org/petecoop/nginx-proxy)
+
 Fork of [jwilder/nginx-proxy](/jwilder/nginx-proxy) with easy let's encrypt support, and support for apps running as paths on the same domain.
 
 nginx-proxy sets up a container running nginx and [docker-gen][1].  docker-gen generates reverse proxy configs for nginx and reloads nginx when containers are started and stopped.
