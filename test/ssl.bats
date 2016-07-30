@@ -23,8 +23,8 @@ function setup {
 	sleep 1
 
 	# THEN
-	assert_301 test.nginx-proxy.bats
-	assert_200_https test.nginx-proxy.bats
+	assert_301 nginx-proxy.bats
+	assert_200_https nginx-proxy.bats
 }
 
 @test "[$TEST_FILE] test HTTPS_METHOD=nohttp" {
@@ -36,8 +36,8 @@ function setup {
 	sleep 1
 
 	# THEN
-	assert_503 test.nginx-proxy.bats
-	assert_200_https test.nginx-proxy.bats
+	assert_503 nginx-proxy.bats
+	assert_200_https nginx-proxy.bats
 }
 
 @test "[$TEST_FILE] test HTTPS_METHOD=noredirect" {
@@ -49,8 +49,8 @@ function setup {
 	sleep 1
 
 	# THEN
-	assert_200 test.nginx-proxy.bats
-	assert_200_https test.nginx-proxy.bats
+	assert_200 nginx-proxy.bats
+	assert_200_https nginx-proxy.bats
 }
 
 @test "[$TEST_FILE] test SSL Strict-Transport-Security" {
@@ -62,8 +62,8 @@ function setup {
 	sleep 1
 
 	# THEN
-	assert_301 test.nginx-proxy.bats
-	assert_200_https test.nginx-proxy.bats
+	assert_301 nginx-proxy.bats
+	assert_200_https nginx-proxy.bats
     assert_output -p "Strict-Transport-Security: max-age=31536000"
 }
 
@@ -76,8 +76,8 @@ function setup {
 	sleep 1
 
 	# THEN
-	assert_200 test.nginx-proxy.bats
-	assert_200_https test.nginx-proxy.bats
+	assert_200 nginx-proxy.bats
+	assert_200_https nginx-proxy.bats
     refute_output -p "Strict-Transport-Security: max-age=31536000"
 }
 
