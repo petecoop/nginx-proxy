@@ -7,7 +7,7 @@ update-dependencies:
 	docker pull python:3
 	docker pull rancher/socat-docker:latest
 	docker pull appropriate/curl:latest
-	docker pull docker:1.12
+	docker pull docker:1.12-rc
 
 test:
 	docker build -t jwilder/nginx-proxy:bats .
