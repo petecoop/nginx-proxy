@@ -15,11 +15,10 @@ function setup {
 	docker_wait_for_log $SUT_CONTAINER 9 "Watching docker events"
 }
 
-@test "[$TEST_FILE] test SSL for VIRTUAL_HOST=*.nginx-proxy.bats" {
+@test "[$TEST_FILE] test SSL for VIRTUAL_HOST=nginx-proxy.bats" {
 	# WHEN
 	prepare_web_container bats-ssl-hosts-1 "80 443" \
-		-e VIRTUAL_HOST=*.nginx-proxy.bats \
-		-e CERT_NAME=nginx-proxy.bats
+		-e VIRTUAL_HOST=nginx-proxy.bats
 	dockergen_wait_for_event $SUT_CONTAINER start bats-ssl-hosts-1
 	sleep 1
 
@@ -31,8 +30,7 @@ function setup {
 @test "[$TEST_FILE] test HTTPS_METHOD=nohttp" {
 	# WHEN
 	prepare_web_container bats-ssl-hosts-2 "80 443" \
-		-e VIRTUAL_HOST=*.nginx-proxy.bats \
-		-e CERT_NAME=nginx-proxy.bats \
+		-e VIRTUAL_HOST=nginx-proxy.bats \
 		-e HTTPS_METHOD=nohttp
 	dockergen_wait_for_event $SUT_CONTAINER start bats-ssl-hosts-2
 	sleep 1
@@ -45,8 +43,7 @@ function setup {
 @test "[$TEST_FILE] test HTTPS_METHOD=noredirect" {
 	# WHEN
 	prepare_web_container bats-ssl-hosts-3 "80 443" \
-		-e VIRTUAL_HOST=*.nginx-proxy.bats \
-		-e CERT_NAME=nginx-proxy.bats \
+		-e VIRTUAL_HOST=nginx-proxy.bats \
 		-e HTTPS_METHOD=noredirect
 	dockergen_wait_for_event $SUT_CONTAINER start bats-ssl-hosts-3
 	sleep 1
@@ -59,7 +56,7 @@ function setup {
 @test "[$TEST_FILE] test SSL Strict-Transport-Security" {
 	# WHEN
 	prepare_web_container bats-ssl-hosts-4 "80 443" \
-		-e VIRTUAL_HOST=*.nginx-proxy.bats \
+		-e VIRTUAL_HOST=nginx-proxy.bats \
 		-e CERT_NAME=nginx-proxy.bats
 	dockergen_wait_for_event $SUT_CONTAINER start bats-ssl-hosts-1
 	sleep 1
@@ -73,8 +70,7 @@ function setup {
 @test "[$TEST_FILE] test HTTPS_METHOD=noredirect disables Strict-Transport-Security" {
 	# WHEN
 	prepare_web_container bats-ssl-hosts-5 "80 443" \
-		-e VIRTUAL_HOST=*.nginx-proxy.bats \
-		-e CERT_NAME=nginx-proxy.bats \
+		-e VIRTUAL_HOST=nginx-proxy.bats \
 		-e HTTPS_METHOD=noredirect
 	dockergen_wait_for_event $SUT_CONTAINER start bats-ssl-hosts-3
 	sleep 1
